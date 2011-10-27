@@ -20,7 +20,9 @@ Gem::Specification.new do |s|
   s.add_development_dependency "bundler"
   s.add_development_dependency "minitest"
   s.add_development_dependency "rack-test"
+  s.add_development_dependency "mocha"
 
   s.add_dependency 'sinatra'
   s.add_dependency 'rake',  '>= 0.8.7'
+  s.add_dependency 'git-ssh-wrapper'
 end
