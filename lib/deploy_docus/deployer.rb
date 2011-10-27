@@ -18,21 +18,21 @@ module DeployDocus
     end
 
     def deploy!
-      clone
-      run_deploy
+
+      with_wrapper do
+        clone
+        run_deploy
+      end
     end
 
 
     private
     def clone
-      wrapper = GitSSHWrapper.new(:private_key_path => ssh_key)
-      %x[env #{wrapper.git_ssh} git clone #{repository} #{tmp}]
-    ensure
-      wrapper.unlink
+      %x[env #{@wrapper.git_ssh} git clone #{repository} #{tmp}]
     end
 
     def run_deploy
-      %x[cd #{tmp}; #{deploy_task}]
+      %x[env #{@wrapper.git_ssh}; cd #{tmp}; #{deploy_task}]
     end
 
     def tmp
@@ -41,6 +41,14 @@ module DeployDocus
 
     def generate_rand
       (0...8).map{65.+(rand(25)).chr}.join
+    end
+
+    def with_wrapper
+      @wrapper = GitSSHWrapper.new(:private_key_path => ssh_key)
+      yield
+    ensure
+      @wrapper.unlink
+      @wrapper = nil
     end
   end
 end
