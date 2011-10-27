@@ -24,7 +24,7 @@ describe DeployDocus::Base do
         returns(deployer)
       deployer.expects(:deploy!).returns(true)
 
-      post '/evome'
+      post '/evome/staging'
       assert last_response.ok?
       assert_equal last_response.body, "OK"
     end
@@ -36,7 +36,7 @@ describe DeployDocus::Base do
         returns(deployer)
       deployer.expects(:deploy!).returns(false)
 
-      post '/evome'
+      post '/evome/staging'
       assert last_response.ok?
       assert_equal last_response.body, "NOT OK"
     end

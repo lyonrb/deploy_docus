@@ -8,9 +8,9 @@ module DeployDocus
     end
 
 
-    post '/:application' do
+    post '/:application/:environment' do
       config = DeployDocus::Config.new(params[:application])
-      deployer = DeployDocus::Deployer.new(config['repository'], config['ssh_key'], config['deploy_task'])
+      deployer = DeployDocus::Deployer.new(config['repository'], config['ssh_key'], config.deploy_task(params[:environment]))
 
       if deployer.deploy!
         "OK"

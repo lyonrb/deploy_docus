@@ -10,6 +10,16 @@ module DeployDocus
       config[key.to_s]
     end
 
+    def deploy_task(environment)
+      data = self['deploy_task']
+
+      if data.is_a?(Hash)
+        data[environment.to_s]
+      else
+        data
+      end
+    end
+
 
     private
     def config
