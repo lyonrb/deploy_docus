@@ -19,7 +19,7 @@ module DeployDocus
         if deployer.deploy!
           {:status => "OK"}.to_json
         else
-          {:status => "NOT OK", :error => deployer.errors}.to_json
+          {:status => "NOT OK", :error => deployer.errors.full_messages}.to_json
         end
       else
         throw :halt, [401, 'Authorization Required']
