@@ -80,7 +80,7 @@ describe DeployDocus::Deployer do
 
   describe "run_deploy" do
     it "should run the deploy task" do
-      @deployer.expects(:`).with(regexp_matches(/^ cd .*; ls -l$/)).once
+      @deployer.expects(:`).with(regexp_matches(/^cd .*;  ls -l$/)).once
       @deployer.send(:run_deploy)
     end
   end

@@ -36,11 +36,11 @@ describe DeployDocus::Base do
           with('git@github.com:evome/evome.git', 'keys/evome_rsa', 'cap staging deploy').
           returns(deployer)
         deployer.expects(:deploy!).returns(false)
-        deployer.expects(:errors).returns({})
+        deployer.expects(:errors).returns(ActiveModel::Errors.new(deployer))
 
         post '/evome/staging', :token => 'azertyuiop'
         assert last_response.ok?
-        assert_equal last_response.body, "{\"status\":\"NOT OK\",\"error\":{}}"
+        assert_equal last_response.body, "{\"status\":\"NOT OK\",\"error\":[]}"
       end
     end
 
