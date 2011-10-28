@@ -2,7 +2,8 @@ require 'git-ssh-wrapper'
 
 module DeployDocus
   class Deployer
-    attr_accessor :repository, :ssh_key, :deploy_task
+    attr_reader :repository, :ssh_key, :deploy_task
+    attr_accessor :wrapper
 
     #
     # Manages cloning and deploying the repository
@@ -18,8 +19,9 @@ module DeployDocus
     end
 
     def deploy!
+      GitSSHWrapper.with_wrapper(:private_key_path => ssh_key) do |w|
+        wrapper = w
 
-      with_wrapper do
         clone
         run_deploy
       end
@@ -28,11 +30,13 @@ module DeployDocus
 
     private
     def clone
-      %x[env #{@wrapper.git_ssh} git clone #{repository} #{tmp}]
+      puts "cloning #{repository}"
+      %x[#{@wrapper ? 'env ' + @wrapper.git_ssh : ''} git clone #{repository} #{tmp}]
     end
 
     def run_deploy
-      %x[env #{@wrapper.git_ssh}; cd #{tmp}; #{deploy_task}]
+      puts "deploying : #{deploy_task}"
+      %x[#{@wrapper ? 'env ' + @wrapper.git_ssh : ''} cd #{tmp}; #{deploy_task}]
     end
 
     def tmp
@@ -41,14 +45,6 @@ module DeployDocus
 
     def generate_rand
       (0...8).map{65.+(rand(25)).chr}.join
-    end
-
-    def with_wrapper
-      @wrapper = GitSSHWrapper.new(:private_key_path => ssh_key)
-      yield
-    ensure
-      @wrapper.unlink
-      @wrapper = nil
     end
   end
 end

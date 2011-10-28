@@ -31,26 +31,15 @@ describe DeployDocus::Deployer do
 
   describe "clone" do
     it "should clone the repository" do
-      @deployer.expects(:`).with(regexp_matches(/^env GIT_SSH='.*' git clone git:\/\/github.com\/evome\/deploy_docus\.git .*$/)).once
-      @deployer.send(:with_wrapper) do
-        @deployer.send(:clone)
-      end
-    end
-
-    it "should unline the wrapper" do
-      GitSSHWrapper.any_instance.expects(:unlink).once
-      @deployer.send(:with_wrapper) do
-        @deployer.send(:clone)
-      end
+      @deployer.expects(:`).with(regexp_matches(/^ git clone git:\/\/github.com\/evome\/deploy_docus\.git .*$/)).once
+      @deployer.send(:clone)
     end
   end
 
   describe "run_deploy" do
     it "should run the deploy task" do
-      @deployer.expects(:`).with(regexp_matches(/^env GIT_SSH='.*'; cd .*; ls -l$/)).once
-      @deployer.send(:with_wrapper) do
-        @deployer.send(:run_deploy)
-      end
+      @deployer.expects(:`).with(regexp_matches(/^ cd .*; ls -l$/)).once
+      @deployer.send(:run_deploy)
     end
   end
 end
