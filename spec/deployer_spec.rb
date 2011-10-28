@@ -20,12 +20,40 @@ describe DeployDocus::Deployer do
     end
   end
 
+  describe "validations" do
+    before do
+      @deployer = DeployDocus::Deployer.new(nil, nil, nil)
+      assert !@deployer.valid?
+    end
+
+    it "should require a repository" do
+      assert_equal @deployer.errors[:repository], ['can\'t be blank']
+    end
+
+    it "should require a ssh_key" do
+      assert_equal @deployer.errors[:ssh_key], ['can\'t be blank']
+    end
+
+    it "should require a deploy_task" do
+      assert_equal @deployer.errors[:deploy_task], ['can\'t be blank']
+    end
+
+  end
+
   describe "deploy!" do
     it "should call clone and run_deploy" do
       @deployer.expects(:clone).returns(true)
       @deployer.expects(:run_deploy).returns(true)
 
-      @deployer.deploy!
+      assert @deployer.deploy!
+    end
+
+    it "should return false if the validations fail" do
+      @deployer.expects(:valid?).returns(false)
+      @deployer.expects(:clone).never
+      @deployer.expects(:run_deploy).never
+
+      assert !@deployer.deploy!
     end
   end
 

@@ -1,9 +1,16 @@
 require 'git-ssh-wrapper'
+require 'active_model'
 
 module DeployDocus
   class Deployer
+    include ActiveModel::Validations
+
     attr_reader :repository, :ssh_key, :deploy_task
     attr_accessor :wrapper
+
+    validates :repository,  :presence => {:allow_blank => false}
+    validates :ssh_key,     :presence => {:allow_blank => false}
+    validates :deploy_task, :presence => {:allow_blank => false}
 
     #
     # Manages cloning and deploying the repository
@@ -15,15 +22,20 @@ module DeployDocus
     # And execute the deploy_task on it.
     #
     def initialize(repository, ssh_key, deploy_task)
-      @repository, @ssh_key, @deploy_task = repository, File.expand_path(ssh_key), deploy_task
+      ssh_key = File.expand_path(ssh_key) if ssh_key
+      @repository, @ssh_key, @deploy_task = repository, ssh_key, deploy_task
     end
 
     def deploy!
-      GitSSHWrapper.with_wrapper(:private_key_path => ssh_key) do |w|
-        @wrapper = w
+      if self.valid?
+        GitSSHWrapper.with_wrapper(:private_key_path => ssh_key) do |w|
+          @wrapper = w
 
-        clone
-        run_deploy
+          clone
+          run_deploy
+        end
+      else
+        false
       end
     end
 
