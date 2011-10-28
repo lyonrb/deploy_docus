@@ -19,8 +19,8 @@ module DeployDocus
     end
 
     def deploy!
-      GitSSHWrapper.with_wrapper(:private_key => ssh_key) do |w|
-        wrapper = w
+      GitSSHWrapper.with_wrapper(:private_key_path => ssh_key) do |w|
+        @wrapper = w
 
         clone
         run_deploy
@@ -31,12 +31,12 @@ module DeployDocus
     private
     def clone
       puts "cloning #{repository}"
-      %x[#{@wrapper ? 'env ' + @wrapper.git_ssh : ''} git clone #{repository} #{tmp}]
+      %x[#{wrapper.nil? ? '' : 'env ' + @wrapper.git_ssh} git clone #{repository} #{tmp}]
     end
 
     def run_deploy
       puts "deploying : #{deploy_task}"
-      %x[#{@wrapper ? 'env ' + @wrapper.git_ssh : ''} cd #{tmp}; #{deploy_task}]
+      %x[#{wrapper.nil? ? '' : 'env ' + @wrapper.git_ssh} cd #{tmp}; #{deploy_task}]
     end
 
     def tmp

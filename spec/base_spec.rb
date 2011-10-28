@@ -19,7 +19,7 @@ describe DeployDocus::Base do
     it "should return OK if the deploy has succeeded" do
       deployer = mock('deployer')
       DeployDocus::Deployer.expects(:new).
-        with('git@github.com:evome/evome.git', 'keys/evome', 'cap staging deploy').
+        with('git@github.com:evome/evome.git', 'keys/evome_rsa', 'cap staging deploy').
         returns(deployer)
       deployer.expects(:deploy!).returns(true)
 
@@ -31,7 +31,7 @@ describe DeployDocus::Base do
     it "should return NOT OK if the deploy has not succeeded" do
       deployer = mock('deployer')
       DeployDocus::Deployer.expects(:new).
-        with('git@github.com:evome/evome.git', 'keys/evome', 'cap staging deploy').
+        with('git@github.com:evome/evome.git', 'keys/evome_rsa', 'cap staging deploy').
         returns(deployer)
       deployer.expects(:deploy!).returns(false)
 

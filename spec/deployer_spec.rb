@@ -12,7 +12,7 @@ describe DeployDocus::Deployer do
     end
 
     it "should define the ssh key path" do
-      assert_equal "~/.ssh/id_rsa", @deployer.ssh_key
+      assert_equal File.expand_path("~/.ssh/id_rsa"), @deployer.ssh_key
     end
 
     it "should define the deploy task" do
