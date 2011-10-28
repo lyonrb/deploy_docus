@@ -1,5 +1,5 @@
 website:
-  repository: git@github.com:evome/evome.git
+  repository: git@github.com:your_organization/your_repo.git
   token: CHANGE ME !
   deploy_task:
-    staging: git push git@heroku.com:evome-staging.git
+    production: git push git@heroku.com:your_application.git
