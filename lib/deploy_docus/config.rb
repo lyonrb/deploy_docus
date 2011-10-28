@@ -23,7 +23,7 @@ module DeployDocus
 
     private
     def config
-      @config ||= YAML.load_file('config.yml')[application]
+      @config ||= YAML.load_file('config.yml')[application] || {}
     rescue
       {}
     end
