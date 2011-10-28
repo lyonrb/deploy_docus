@@ -27,6 +27,7 @@ Add your deployment information for `my_application`. For example :
 
     my_application:
       repository: git@github.com:my_organization/my_repository.git
+      token: qhbnlkmnmh8096785nknmgiuh789BKMKGPIHMLNMÇ0HIONBON
       deploy_task:
         production: cap production deploy
 
