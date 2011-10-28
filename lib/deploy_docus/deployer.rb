@@ -42,13 +42,15 @@ module DeployDocus
     private
     def clone
       puts "cloning #{repository}"
-      %x[#{wrapper.nil? ? '' : 'env ' + @wrapper.git_ssh} git clone #{repository} #{tmp}]
+      clone_result = %x[#{wrapper.nil? ? '' : 'env ' + @wrapper.git_ssh} git clone #{repository} #{tmp}]
+      puts clone_result
       $?.exitstatus == 0
     end
 
     def run_deploy
       puts "deploying : #{deploy_task}"
-      %x[#{wrapper.nil? ? '' : 'env ' + @wrapper.git_ssh} cd #{tmp}; #{deploy_task}]
+      deploy_result = %x[#{wrapper.nil? ? '' : 'env ' + @wrapper.git_ssh} cd #{tmp}; #{deploy_task}]
+      puts deploy_result
       $?.exitstatus == 0
     end
 
