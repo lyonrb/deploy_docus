@@ -49,7 +49,7 @@ module DeployDocus
 
     def run_deploy
       puts "deploying : #{deploy_task} in #{tmp}"
-      deploy_result = %x[#{wrapper.nil? ? '' : 'env ' + @wrapper.git_ssh}; cd #{tmp}; #{deploy_task}]
+      deploy_result = %x[cd #{tmp}; #{wrapper.nil? ? '' : 'env ' + @wrapper.git_ssh} #{deploy_task}]
       puts deploy_result
       $?.exitstatus == 0
     end
