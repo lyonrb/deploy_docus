@@ -15,11 +15,11 @@ module DeployDocus
     # And execute the deploy_task on it.
     #
     def initialize(repository, ssh_key, deploy_task)
-      @repository, @ssh_key, @deploy_task = repository, ssh_key, deploy_task
+      @repository, @ssh_key, @deploy_task = repository, File.expand_path(ssh_key), deploy_task
     end
 
     def deploy!
-      GitSSHWrapper.with_wrapper(:private_key_path => ssh_key) do |w|
+      GitSSHWrapper.with_wrapper(:private_key => ssh_key) do |w|
         wrapper = w
 
         clone
