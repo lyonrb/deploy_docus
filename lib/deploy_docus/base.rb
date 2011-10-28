@@ -10,7 +10,7 @@ module DeployDocus
 
     post '/:application/:environment' do
       config = DeployDocus::Config.new(params[:application])
-      deployer = DeployDocus::Deployer.new(config['repository'], "keys/#{config['repository']}", config.deploy_task(params[:environment]))
+      deployer = DeployDocus::Deployer.new(config['repository'], "keys/#{params[:application]}", config.deploy_task(params[:environment]))
 
       if deployer.deploy!
         "OK"
