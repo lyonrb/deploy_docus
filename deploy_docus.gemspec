@@ -26,4 +26,5 @@ Gem::Specification.new do |s|
   s.add_dependency 'rake',  '>= 0.8.7'
   s.add_dependency 'git-ssh-wrapper'
   s.add_dependency 'activemodel'
+  s.add_dependency 'thor'
 end

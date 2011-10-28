@@ -1,0 +1,16 @@
+#!/usr/bin/env ruby
+
+if File.exists?(File.join(File.expand_path('../../', __FILE__), '.git'))
+  ddocus_path = File.expand_path('../../lib', __FILE__)
+  $:.unshift(ddocus_path)
+end
+require "deploy_docus"
+
+action = ARGV.shift
+case action
+  when "new"
+    DeployDocus::Generators::New.start
+
+  else
+    raise "Invalid Action #{action}"
+end

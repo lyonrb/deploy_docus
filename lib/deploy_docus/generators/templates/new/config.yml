@@ -1,0 +1,4 @@
+website:
+  repository: git@github.com:evome/evome.git
+  deploy_task:
+    staging: git push git@heroku.com:evome-staging.git

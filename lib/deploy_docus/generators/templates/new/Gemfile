@@ -1,0 +1,3 @@
+source :rubygems
+
+gem 'deploy_docus', :path => '../deploy_docus'
