@@ -25,7 +25,7 @@ describe DeployDocus::Base do
 
       post '/evome/staging'
       assert last_response.ok?
-      assert_equal last_response.body, "OK"
+      assert_equal last_response.body, "{\"status\":\"OK\"}"
     end
 
     it "should return NOT OK if the deploy has not succeeded" do
@@ -34,10 +34,11 @@ describe DeployDocus::Base do
         with('git@github.com:evome/evome.git', 'keys/evome_rsa', 'cap staging deploy').
         returns(deployer)
       deployer.expects(:deploy!).returns(false)
+      deployer.expects(:errors).returns({})
 
       post '/evome/staging'
       assert last_response.ok?
-      assert_equal last_response.body, "NOT OK"
+      assert_equal last_response.body, "{\"status\":\"NOT OK\",\"error\":{}}"
     end
   end
 end

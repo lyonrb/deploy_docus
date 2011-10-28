@@ -1,4 +1,5 @@
 require 'sinatra/base'
+require 'json'
 
 module DeployDocus
   class Base < Sinatra::Base
@@ -12,10 +13,11 @@ module DeployDocus
       config = DeployDocus::Config.new(params[:application])
       deployer = DeployDocus::Deployer.new(config['repository'], "keys/#{params[:application]}_rsa", config.deploy_task(params[:environment]))
 
+      content_type :json
       if deployer.deploy!
-        "OK"
+        {:status => "OK"}.to_json
       else
-        "NOT OK"
+        {:status => "NOT OK", :error => deployer.errors}.to_json
       end
     end
   end
