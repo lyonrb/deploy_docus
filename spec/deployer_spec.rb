@@ -55,6 +55,20 @@ describe DeployDocus::Deployer do
 
       assert !@deployer.deploy!
     end
+
+    it "should not run_deploy if the clone has failed" do
+      @deployer.expects(:clone).returns(false)
+      @deployer.expects(:run_deploy).never
+
+      assert !@deployer.deploy!
+    end
+
+    it "should return false if the run_deploy fails" do
+      @deployer.expects(:clone).returns(true)
+      @deployer.expects(:run_deploy).returns(false)
+
+      assert !@deployer.deploy!
+    end
   end
 
   describe "clone" do
