@@ -39,6 +39,10 @@ And you can easily test your deployments with CURL :
 The first parameter in the URI is the application's name.
 The second one is the environment (as defined in your config.yml file).
 
+## Scripts to use Deploy Docus
+
+* [Deploy from hubot](https://gist.github.com/1322162)
+
 ## Contributing
 
 We're open to any contribution. It has to be tested properly though.
