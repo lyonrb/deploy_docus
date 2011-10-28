@@ -34,7 +34,7 @@ Add your deployment information for `my_application`. For example :
 And you're done ! Deploy your application somewhere (like on heroku).
 And you can easily test your deployments with CURL :
 
-    curl -X POST http://your-deploy-docus-application/my_application/production
+    curl -d "token=THE TOKEN YOU SPECIFIED IN THE YML FILE" http://your-deploy-docus-application/my_application/production
 
 The first parameter in the URI is the application's name.
 The second one is the environment (as defined in your config.yml file).
