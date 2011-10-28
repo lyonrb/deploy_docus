@@ -40,7 +40,10 @@ describe DeployDocus::Base do
 
         post '/evome/staging', :token => 'azertyuiop'
         assert last_response.ok?
-        assert_equal last_response.body, "{\"status\":\"NOT OK\",\"error\":[]}"
+
+        result = JSON.parse(last_response.body)
+        assert_equal result['status'], 'NOT OK'
+        assert_equal result['error'], []
       end
     end
 
