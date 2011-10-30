@@ -18,7 +18,7 @@ Gem::Specification.new do |s|
   s.rubyforge_project = '[none]'
 
   s.bindir       = 'bin'
-  s.executables  = []
+  s.executables  = ['ddocus']
 
 
   s.add_development_dependency "bundler"
