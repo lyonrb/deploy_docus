@@ -17,6 +17,10 @@ Gem::Specification.new do |s|
   s.require_path = 'lib'
   s.rubyforge_project = '[none]'
 
+  s.bindir       = 'bin'
+  s.executables  = []
+
+
   s.add_development_dependency "bundler"
   s.add_development_dependency "minitest"
   s.add_development_dependency "rack-test"
