@@ -4,7 +4,7 @@ if File.exists?(File.join(File.expand_path('../../', __FILE__), '.git'))
   ddocus_path = File.expand_path('../../lib', __FILE__)
   $:.unshift(ddocus_path)
 end
-require "deploy_docus"
+require "deploy_docus/generators"
 
 action = ARGV.shift
 case action
