@@ -1,7 +1,7 @@
 # Deploy Docus
 
 Web interface to easily deploy your application
-[![Travis](https://secure.travis-ci.org/evome/deploy_docus.png)](http://travis-ci.org/evome/deploy_docus)
+[![Travis](https://secure.travis-ci.org/lyonrb/deploy_docus.png)](http://travis-ci.org/lyonrb/deploy_docus)
 
 ## Installation
 
@@ -50,7 +50,7 @@ We're open to any contribution. It has to be tested properly though.
 * [Fork](http://help.github.com/forking/) the project
 * Do your changes and commit them to your repository
 * Test your changes. We won't accept any untested contributions (except if they're not testable).
-* Create an [issue](https://github.com/evome/deploy_docus/issues) with a link to your commits.
+* Create an [issue](https://github.com/lyonrb/deploy_docus/issues) with a link to your commits.
 
 ## Maintainers
 
@@ -59,4 +59,4 @@ We're open to any contribution. It has to be tested properly though.
 * Franck VERROT ([github.com/cesario](http://github.com/cesario),[verrot.fr](http://verrot.fr/))
 
 ## License
-MIT License. Copyright 2011 Evome. http://evome.fr
+MIT License. Copyright 2011 LyonRB. http://lyonrb.fr
