@@ -8,7 +8,7 @@ Gem::Specification.new do |s|
   s.version      = DeployDocus::VERSION
   s.authors      = ["Evome"]
   s.email        = "dev@evome.fr"
-  s.homepage     = "https://github.com/evome/deploy_docus"
+  s.homepage     = "https://github.com/lyonrb/deploy_docus"
   s.summary      = "Web interface to deploy your application"
   s.description  = "Deploy your application with a POST request"
 
